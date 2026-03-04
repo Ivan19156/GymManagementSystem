@@ -1,0 +1,29 @@
+@model GymManagement.Domain.Entities.UserMembership
+@{ ViewData["Title"] = "Редагування абонементу"; }
+<h2>Редагування абонементу</h2>
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="ClientId" class="form-label">Клієнт</label>
+        <select asp-for="ClientId" asp-items="ViewBag.Clients" class="form-select"></select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="MembershipPlanId" class="form-label">План</label>
+        <select asp-for="MembershipPlanId" asp-items="ViewBag.Plans" class="form-select"></select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="StartDate" class="form-label"></label>
+        <input asp-for="StartDate" type="date" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="EndDate" class="form-label"></label>
+        <input asp-for="EndDate" type="date" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="StatusId" class="form-label">Статус</label>
+        <select asp-for="StatusId" asp-items="ViewBag.Statuses" class="form-select"></select>
+    </div>
+    <button type="submit" class="btn btn-primary">Зберегти</button>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</form>

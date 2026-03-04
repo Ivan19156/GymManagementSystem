@@ -1,0 +1,10 @@
+@model GymManagement.Domain.Entities.MembershipType
+@{ ViewData["Title"] = "Деталі типу членств"; }
+
+<h2>Деталі типу членств</h2>
+<dl class="row">
+    <dt class="col-sm-2">Назва</dt>
+    <dd class="col-sm-10">@Model.Name</dd>
+</dl>
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Редагувати</a>
+<a asp-action="Index" class="btn btn-secondary">Назад</a>

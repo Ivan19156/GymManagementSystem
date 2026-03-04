@@ -1,0 +1,26 @@
+@model IEnumerable<GymManagement.Domain.Entities.UserMembership>
+@{ ViewData["Title"] = "Абонементи"; }
+<h2>Абонементи</h2>
+<a asp-action="Create" class="btn btn-primary mb-3">+ Додати</a>
+<table class="table table-striped">
+    <thead>
+    <tr><th>Клієнт</th><th>План</th><th>Початок</th><th>Кінець</th><th>Статус</th><th></th></tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Client?.User?.FirstName @item.Client?.User?.LastName</td>
+            <td>@item.MembershipPlan?.Name</td>
+            <td>@item.StartDate.ToShortDateString()</td>
+            <td>@item.EndDate.ToShortDateString()</td>
+            <td>@item.Status?.Name</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Редагувати</a>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Деталі</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Видалити</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

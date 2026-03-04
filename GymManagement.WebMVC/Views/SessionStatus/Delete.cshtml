@@ -1,0 +1,11 @@
+@model GymManagement.Domain.Entities.SessionStatus
+@{ ViewData["Title"] = "Видалення статусу сесій"; }
+
+<h2>Видалити статус сеесії?</h2>
+<p>Ви впевнені що хочете видалити <strong>@Model.Name</strong>?</p>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Видалити</button>
+    <a asp-action="Index" class="btn btn-secondary">Скасувати</a>
+</form>

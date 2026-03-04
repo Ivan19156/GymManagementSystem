@@ -1,0 +1,9 @@
+@model GymManagement.Domain.Entities.User
+@{ ViewData["Title"] = "Видалення користувача"; }
+<h2>Видалити користувача?</h2>
+<p>Ви впевнені що хочете видалити <strong>@Model.FirstName @Model.LastName</strong>?</p>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Видалити</button>
+    <a asp-action="Index" class="btn btn-secondary">Скасувати</a>
+</form>

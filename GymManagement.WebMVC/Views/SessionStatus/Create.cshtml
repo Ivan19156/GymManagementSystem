@@ -1,0 +1,14 @@
+@model GymManagement.Domain.Entities.SessionStatus
+@{ ViewData["Title"] = "Новий статус сесії"; }
+
+<h2>Новий статус сесії</h2>
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Зберегти</button>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</form>

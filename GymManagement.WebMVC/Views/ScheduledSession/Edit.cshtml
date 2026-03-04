@@ -1,0 +1,37 @@
+@model GymManagement.Domain.Entities.ScheduledSession
+@{ ViewData["Title"] = "Редагування заняття"; }
+<h2>Редагування заняття</h2>
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="ClientId" class="form-label">Клієнт</label>
+        <select asp-for="ClientId" asp-items="ViewBag.Clients" class="form-select"></select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="TrainerId" class="form-label">Тренер</label>
+        <select asp-for="TrainerId" asp-items="ViewBag.Trainers" class="form-select"></select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="TrainingTypeId" class="form-label">Тип тренування</label>
+        <select asp-for="TrainingTypeId" asp-items="ViewBag.TrainingTypes" class="form-select"></select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="SessionDate" class="form-label"></label>
+        <input asp-for="SessionDate" type="date" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="StartTime" class="form-label"></label>
+        <input asp-for="StartTime" type="time" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="EndTime" class="form-label"></label>
+        <input asp-for="EndTime" type="time" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="StatusId" class="form-label">Статус</label>
+        <select asp-for="StatusId" asp-items="ViewBag.Statuses" class="form-select"></select>
+    </div>
+    <button type="submit" class="btn btn-primary">Зберегти</button>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</form>

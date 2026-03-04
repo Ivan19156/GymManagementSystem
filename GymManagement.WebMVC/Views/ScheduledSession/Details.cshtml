@@ -1,0 +1,13 @@
+@model GymManagement.Domain.Entities.ScheduledSession
+@{ ViewData["Title"] = "Деталі заняття"; }
+<h2>Деталі заняття</h2>
+<dl class="row">
+    <dt class="col-sm-3">Клієнт</dt><dd class="col-sm-9">@Model.Client?.User?.FirstName @Model.Client?.User?.LastName</dd>
+    <dt class="col-sm-3">Тренер</dt><dd class="col-sm-9">@Model.Trainer?.User?.FirstName @Model.Trainer?.User?.LastName</dd>
+    <dt class="col-sm-3">Тип тренування</dt><dd class="col-sm-9">@Model.TrainingType?.Name</dd>
+    <dt class="col-sm-3">Дата</dt><dd class="col-sm-9">@Model.SessionDate.ToShortDateString()</dd>
+    <dt class="col-sm-3">Час</dt><dd class="col-sm-9">@Model.StartTime - @Model.EndTime</dd>
+    <dt class="col-sm-3">Статус</dt><dd class="col-sm-9">@Model.Status?.Name</dd>
+</dl>
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Редагувати</a>
+<a asp-action="Index" class="btn btn-secondary">Назад</a>

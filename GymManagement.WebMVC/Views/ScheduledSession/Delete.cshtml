@@ -1,0 +1,9 @@
+@model GymManagement.Domain.Entities.ScheduledSession
+@{ ViewData["Title"] = "Видалення заняття"; }
+<h2>Видалити заняття?</h2>
+<p>Заняття <strong>@Model.SessionDate.ToShortDateString()</strong> для клієнта <strong>@Model.Client?.User?.FirstName @Model.Client?.User?.LastName</strong>?</p>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Видалити</button>
+    <a asp-action="Index" class="btn btn-secondary">Скасувати</a>
+</form>

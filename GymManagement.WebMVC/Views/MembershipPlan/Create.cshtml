@@ -1,0 +1,26 @@
+@model GymManagement.Domain.Entities.MembershipPlan
+@{ ViewData["Title"] = "Новий план"; }
+<h2>Новий план абонементу</h2>
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label"></label>
+        <input asp-for="Price" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="DurationDays" class="form-label"></label>
+        <input asp-for="DurationDays" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="TypeId" class="form-label">Тип</label>
+        <select asp-for="TypeId" asp-items="ViewBag.Types" class="form-select">
+            <option value="">-- Оберіть тип --</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Зберегти</button>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</form>

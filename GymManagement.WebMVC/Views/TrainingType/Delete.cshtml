@@ -1,0 +1,10 @@
+@model GymManagement.Domain.Entities.TrainingType
+@{ ViewData["Title"] = "Видалення типу тренування"; }
+
+<h2>Видалити тип тренування?</h2>
+<p>Ви впевнені що хочете видалити <strong>@Model.Name</strong> (категорія: @Model.Category?.Name)?</p>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Видалити</button>
+    <a asp-action="Index" class="btn btn-secondary">Скасувати</a>
+</form>

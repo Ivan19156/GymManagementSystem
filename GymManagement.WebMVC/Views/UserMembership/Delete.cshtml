@@ -1,0 +1,9 @@
+@model GymManagement.Domain.Entities.UserMembership
+@{ ViewData["Title"] = "Видалення абонементу"; }
+<h2>Видалити абонемент?</h2>
+<p>Абонемент клієнта <strong>@Model.Client?.User?.FirstName @Model.Client?.User?.LastName</strong>, план <strong>@Model.MembershipPlan?.Name</strong>?</p>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Видалити</button>
+    <a asp-action="Index" class="btn btn-secondary">Скасувати</a>
+</form>
