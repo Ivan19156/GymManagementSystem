@@ -1,18 +1,22 @@
 using GymManagement.Domain.Entities;
 using GymManagement.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymManagement.WebMVC.Controllers;
 
+[Authorize]
 public class SessionStatusController : Controller
 {
     private readonly GymContext _context;
     public SessionStatusController(GymContext context) => _context = context;
 
+    [AllowAnonymous]
     public async Task<IActionResult> Index() =>
         View(await _context.SessionStatuses.ToListAsync());
 
+    [AllowAnonymous]
     public async Task<IActionResult> Details(int id)
     {
         var item = await _context.SessionStatuses.FindAsync(id);

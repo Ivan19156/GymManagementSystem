@@ -1,16 +1,19 @@
 using GymManagement.Domain.Entities;
 using GymManagement.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymManagement.WebMVC.Controllers;
 
+[Authorize]
 public class UserMembershipController : Controller
 {
     private readonly GymContext _context;
     public UserMembershipController(GymContext context) => _context = context;
 
+    [AllowAnonymous]
     public async Task<IActionResult> Index() =>
         View(await _context.UserMemberships
             .Include(m => m.Client).ThenInclude(c => c.User)
@@ -18,6 +21,7 @@ public class UserMembershipController : Controller
             .Include(m => m.Status)
             .ToListAsync());
 
+    [AllowAnonymous]
     public async Task<IActionResult> Details(int id)
     {
         var item = await _context.UserMemberships
@@ -36,7 +40,7 @@ public class UserMembershipController : Controller
             "UserId", "Name", item?.ClientId);
         ViewBag.Plans = new SelectList(_context.MembershipPlans.Include(p => p.Type)
             .Select(p => new { p.Id, Name = p.Name + " (" + p.Type.Name + ")" }),
-            "Id", "Name", item?.MembershipPlan);
+            "Id", "Name", item?.MembershipPlanId);
         ViewBag.Statuses = new SelectList(_context.MembershipStatuses, "Id", "Name", item?.StatusId);
     }
 

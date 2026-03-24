@@ -1,16 +1,19 @@
 using GymManagement.Domain.Entities;
 using GymManagement.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymManagement.WebMVC.Controllers;
 
+[Authorize]
 public class UserController : Controller
 {
     private readonly GymContext _context;
     public UserController(GymContext context) => _context = context;
 
+    [AllowAnonymous]
     public async Task<IActionResult> Index() =>
         View(await _context.Users
             .Include(u => u.Admin)
@@ -18,9 +21,11 @@ public class UserController : Controller
             .Include(u => u.Trainer)
             .ToListAsync());
 
+    [AllowAnonymous]
     public async Task<IActionResult> Details(int id)
     {
         var item = await _context.Users
+
             .Include(u => u.Admin)
             .Include(u => u.Client)
             .Include(u => u.Trainer).ThenInclude(t => t!.Specialization)

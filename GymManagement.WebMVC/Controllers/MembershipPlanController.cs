@@ -1,19 +1,23 @@
 using GymManagement.Domain.Entities;
 using GymManagement.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymManagement.WebMVC.Controllers;
 
+[Authorize]
 public class MembershipPlanController : Controller
 {
     private readonly GymContext _context;
     public MembershipPlanController(GymContext context) => _context = context;
 
+    [AllowAnonymous]
     public async Task<IActionResult> Index() =>
         View(await _context.MembershipPlans.Include(m => m.Type).ToListAsync());
 
+    [AllowAnonymous]
     public async Task<IActionResult> Details(int id)
     {
         var item = await _context.MembershipPlans.Include(m => m.Type).FirstOrDefaultAsync(m => m.Id == id);

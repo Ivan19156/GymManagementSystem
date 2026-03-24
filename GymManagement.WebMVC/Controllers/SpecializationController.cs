@@ -1,18 +1,22 @@
 using GymManagement.Domain.Entities;
 using GymManagement.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymManagement.WebMVC.Controllers;
 
+[Authorize]
 public class SpecializationController : Controller
 {
     private readonly GymContext _context;
     public SpecializationController(GymContext context) => _context = context;
 
+    [AllowAnonymous]
     public async Task<IActionResult> Index() =>
         View(await _context.Specializations.ToListAsync());
 
+    [AllowAnonymous]
     public async Task<IActionResult> Details(int id)
     {
         var item = await _context.Specializations.FindAsync(id);

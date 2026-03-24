@@ -1,10 +1,12 @@
 using GymManagement.Domain.Entities;
 using GymManagement.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymManagement.WebMVC.Controllers;
 
+[Authorize]
 public class TrainingCategoryController : Controller
 {
     private readonly GymContext _context;
@@ -14,11 +16,13 @@ public class TrainingCategoryController : Controller
         _context = context;
     }
 
+    [AllowAnonymous]
     public async Task<IActionResult> Index()
     {
         return View(await _context.TrainingCategories.ToListAsync());
     }
 
+    [AllowAnonymous]
     public async Task<IActionResult> Details(int id)
     {
         var category = await _context.TrainingCategories.FindAsync(id);

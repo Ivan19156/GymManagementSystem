@@ -1,8 +1,53 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@{
+    ViewData["Title"] = "Дашборд";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h2 class="mb-4">Дашборд</h2>
+
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-header fw-semibold">Абонементи за місяцями</div>
+            <div class="card-body">
+                <canvas id="membershipChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-header fw-semibold">Заняття за тренерами</div>
+            <div class="card-body">
+                <canvas id="trainerChart"></canvas>
+            </div>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+    async function renderChart(url, canvasId, label, color) {
+        const res  = await fetch(url);
+        const json = await res.json();
+        new Chart(document.getElementById(canvasId), {
+            type: 'bar',
+            data: {
+                labels: json.labels,
+                datasets: [{
+                    label: label,
+                    data: json.data,
+                    backgroundColor: color
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+            }
+        });
+    }
+
+    renderChart('/Charts/MembershipsByMonth', 'membershipChart', 'Абонементи', 'rgba(13, 110, 253, 0.75)');
+    renderChart('/Charts/SessionsByTrainer',  'trainerChart',    'Заняття',    'rgba(25, 135, 84, 0.75)');
+</script>
+}

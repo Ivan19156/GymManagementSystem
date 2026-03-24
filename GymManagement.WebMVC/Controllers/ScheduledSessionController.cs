@@ -1,16 +1,19 @@
 using GymManagement.Domain.Entities;
 using GymManagement.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymManagement.WebMVC.Controllers;
 
+[Authorize]
 public class ScheduledSessionController : Controller
 {
     private readonly GymContext _context;
     public ScheduledSessionController(GymContext context) => _context = context;
 
+    [AllowAnonymous]
     public async Task<IActionResult> Index() =>
         View(await _context.ScheduledSessions
             .Include(s => s.Client).ThenInclude(c => c.User)
@@ -19,6 +22,7 @@ public class ScheduledSessionController : Controller
             .Include(s => s.Status)
             .ToListAsync());
 
+    [AllowAnonymous]
     public async Task<IActionResult> Details(int id)
     {
         var item = await _context.ScheduledSessions
